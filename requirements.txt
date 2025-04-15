@@ -1,0 +1,100 @@
+CS-546 Lab 9
+Array Sort
+For this lab, you will be using HTML, CSS, and JavaScript on the user's browser to make a simple array sort!
+
+You will create an express server with a single page at the location / that will provide the user with a web page to allow them to enter a variable number of arrays (separated by comma) with numbers and it will return an array with the sorted values from each array. The entire checking operation will be done using client-side JavaScript. You will get a 0 if you perform the processing server-side.
+
+YOU MUST use the directory and file structure in the code stub or points will be deducted. You can download the starter template here:  Lab9_stub.zipDownload Lab9_stub.zip
+
+PLEASE NOTE: THE STUB DOES NOT INCLUDE THE PACKAGE.JSON FILE. YOU WILL NEED TO CREATE IT! DO NOT ADD ANY OTHER FILE OR FOLDER APART FROM PACKAGE.JSON FILE. Do not forget to add the type: module property. 
+
+The Server
+Your server this week should not be doing any of the processing! Your server only exists to allow someone to get to the HTML Page and download the associated assets to run the array sort page. If your server does any of the processing besides sending the page to the user, it will result in a 0 for the assignment. 
+
+/ The Whole Array Sort Application
+Your page should have a few basic user interface elements:
+
+Inside the body element you will have:
+
+A header element, with an h1 naming your site, (your title element inside the head element must match this)
+You will have a main element that contains:
+A paragraph element with an id attribute set to "error" that will be hidden initially and you will show/hide this depending if there are errors along with changing the innerhtml to to describe the error to the user. 
+Your page will have a form inside the main element with a method attribute of POST. You will give the form a name and id attribute of arraySortForm and the form will have the following elements nested inside the form.:
+
+A label with a for attribute referencing your input's id,  array_input
+A input with a name and id attribute set as array_input and  input type of text
+A button element to submit the form with a name and id attribute set as submitButton (This should be a button element <button>, NOT an input).
+A single ordered list with an id attribute of input_sorted. All the arrays you have checked so far (until you refresh the page) will appear in this list as list items. Each item in the list will alternate the text colors starting with blue, then red, then blue, then red etc..
+A footer element (this element is outside of the main element as shown below) with your name, student ID, and any other info about yourself you wish to include 
+
+An example that would be displayed in LI of the list (YOU MUST DISPLAY IT WITH THE ARRAY BRACKETS [] )
+[0, 1, 2, 3, 6, 7, 9] 
+[1, 5, 6, 8, 10, 11]
+[5, 6, 7, 8, 9, 20, 25, 40] 
+[4, 6, 9, 11, 15]
+The structure of your HTML should look JUST like this, DO NOT ADD ANY OTHER ELEMENTS(except the list items that get added to the ol dynamically through JS).  Obviously there are no ids/names set and there is no content in the tags, but follow the structure.:
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title></title>
+    <link rel="stylesheet" src="">
+</head>
+<body>
+    <header>
+        <h1></h1>
+    </header>
+    <main>
+        <p></p>
+        <form>
+            <label></label>
+            <input>
+            <button></button>
+        </form>
+        <ol></ol>
+    </main>
+    <footer></footer>
+    <script src=""></script>
+</body>
+</html>
+
+
+ 
+
+Using client-side JavaScript only (/public/js/form_process.js), you will add an event listener and then listen for the form's submit event; when the form is submitted, you will:
+
+Prevent the default behavior of the form.
+Get the value of the input text element.  
+You should be expecting a variable number of arrays typed into the input separated by commas:  For example: [3, 0, 1, 2, 4], [1, 2, 8, 15], [6, 3, 10, 25, 29]
+All array elements should be whole numbers (negative and 0 are allowed), no decimals. If any of the elements in any of the arrays is not a whole number, you will display an error on the page in the paragraph element that has the id of "error"
+Each array should have at least one element that is a whole number (negative and 0 are allowed), no decimals. (so no empty arrays)
+You can ignore any extra commas between array inputs for example, inputting: [3, 0, 1, 2, 4],, [1, 2, 8, 15], [6, 3, 10, 25, 29],
+There should be at least one array inputted. 
+If there is/are empty element(s) in the ANY of the arrays that were inputted, you must display an error and not continue.  For example, inputting: [3, 0, 1, , 4], [1, 2, 8, 15] [6, 3, 10, 25, 29]
+You will then return a single array that has all the values from the arrays inputted sorted from lowest to highest number with no duplicates (so unique elements).  For example:  If our input was: [3, 0, 1, 2, 4], [1, 2, 8, 15], [6, 3, 10, 25, 29] You would return:  [0, 1, 2, 3, 4, 6, 8, 10, 15, 25, 29]
+Add a list item to the #input_sorted list of result of the sort you have just completed. You will alternate the class for each list item using the classes is-odd and is-even (described below), starting with is-odd first.
+If the user does not have a value for the input when they submit, you should not continue processing and instead should inform them of an error somehow or if they enter anything besides an single array or a list of arrays.
+
+Do not forget to hide the error paragraph if the input was valid.  So for example, if I enter in input that is invalid, the application will how the error paragraph with text explaining the issue; for example "Input cannot just be spaces!".  Then if I re-input the input, but this time it was valid, the error paragraph should get hidden. (look at the Simple Dom Example from Lecture 8's lecture code to see an example of that)
+
+YOU MUST USE THE SAME EXACT NAME/ID ATTRIBUTES AS STATED IN THE ASSIGNMENT, THE GRADING SCRIPT WILL BE LOOKING FOR THESE ELEMENTS BY ID AND NAME SO IF YOU DO NOT NAME THEM EXACTLY WHAT IS STATED, YOU WILL GET THE POINTS OFF FOR IT. 
+
+You can use either the DOM API or jQuery (or a mix of both) for the assignment. 
+
+The style - myStyles.css
+You will style your page using at least 10 CSS rule-sets for general CSS styling. You will place the CSS in its own file.
+
+You must style the is-odd class to make text have a color of #0000FF and is-even class to make text have a color of #FF0000. Both is-odd and is-even should also be bold (these can count as 2 of your 10 rule-sets) 
+
+References and Packages
+Basic CSS info can easily be referenced in the MDN CSS tutorial .
+
+Requirements
+All previous requirements still apply.
+You must remember to update your package.json file to set app.js as your starting script!
+Your HTML must be valid  or you will lose points on the assignment.
+Your HTML must make semantical sense; usage of tags for the purpose of simply changing the style of elements (such as i, b, font, center, etc) will result in points being deducted; think in terms of content first, then style with your CSS.
+You can be as creative as you'd like to fulfill front-end requirements; if an implementation is not explicitly stated, however you go about it is fine (provided the HTML is valid and semantical). Design is not a factor in this course.
+Your client side JavaScript must be in its own file and referenced from the HTML accordingly.
+All inputs must be properly labeled!
